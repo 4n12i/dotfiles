@@ -14,25 +14,30 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugin list
 require("lazy").setup({
-    -- Color scheme
     "EdenEast/nightfox.nvim",
-    { -- Nvim-treesitter
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    }, 
+    {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         config = function ()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = {"vim","json","lua","gitignore","bash","markdown","python"},
+                ensure_installed = {"vim","json","lua","gitignore","bash","markdown","python","rust"},
                 highlight = { enable = true },
                 indent = { enable = true },
             })
         end
     },
-    -- Lualine
     "nvim-lualine/lualine.nvim",
 })
 
-vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme nightfox")
+vim.cmd[[colorscheme tokyonight]]
 require"lualine-config"
 
 vim.scriptencoding = 'utf-8'
