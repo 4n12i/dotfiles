@@ -4,19 +4,34 @@
 autoload -Uz colors
 colors
 
-autoload -Uz vcs_info
-setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
+autoload -Uz compinit
+compinit
+
+source ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWUPSTREAM=auto
+setopt PROMPT_SUBST
+
+git_color() {
+	local color git_info reset
+	git_info="$(__git_ps1 "%s")"
+	reset="%{$reset_color%}"
+	if [[ $git_info == *"%"* ]] || [[ $git_info == *"*"* ]]; then
+		color="%{${fg[red]}%}"
+  	elif [[ $git_info == *"+"* ]]; then
+		color="%{${fg[green]}%}"
+  	else
+		color="%{${fg[cyan]}%}"
+  	fi
+
+	echo "$color$git_info$reset"
+}
 
 status_code () {
     local ok="(*'-'%)<"
     local ng="(*;-;%)<"
-
     local color face reset
     color="%{%(?.${fg[magenta]}.${fg[cyan]})%}"
     face="%(?.$ok.$ng)"
@@ -25,8 +40,9 @@ status_code () {
     echo "$color$face$reset"
 }
 
-PROMPT='%D{%H:%M:%S} %n@%m %F{blue}[%~]%f
+PROMPT='%F{blue}%~%f %F{yellow}$(__git_ps1 "[")%f`git_color`%F{yellow}$(__git_ps1 "]")%f
 `status_code` %# '
+RPROMPT='%D{%H:%M:%S}'
 
 # Insert new line.
 function precmd() {
