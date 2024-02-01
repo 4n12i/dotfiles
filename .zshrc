@@ -7,7 +7,7 @@ colors
 autoload -Uz compinit
 compinit
 
-source ~/.git-prompt.sh
+source $HOME/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -85,10 +85,5 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-### nvim ###
-alias vim='nvim'
-
 ### bat ###
-alias bat='batcat'
-alias cat='batcat'
 export BAT_THEME="Solarized (dark)"

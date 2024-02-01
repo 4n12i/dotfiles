@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable", 
         lazypath,
     })
 end
@@ -20,6 +20,14 @@ require("lazy").setup({
         lazy = false,
         priority = 1000,
         opts = {},
+		config = function()
+			local configs = require("tokyonight")
+			configs.setup({
+				style = "night", 
+				on_colors = function(colors) end, 
+				on_highlights = function(highlights, colors) end, 
+			})
+		end
     }, 
     {
         "nvim-treesitter/nvim-treesitter",
@@ -27,7 +35,7 @@ require("lazy").setup({
         config = function ()
             local configs = require("nvim-treesitter.configs")
             configs.setup({
-                ensure_installed = {"vim","json","lua","gitignore","bash","markdown","python","rust"},
+                ensure_installed = {"lua", "rust", "zig", "c", "python"},
                 highlight = { enable = true },
                 indent = { enable = true },
             })
@@ -51,7 +59,8 @@ vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.signcolumn = 'yes'
 vim.opt.showcmd = true
-vim.opt.mouse = 'a' -- can use mouse
+vim.opt.mouse = 'a' 
 vim.opt.hlsearch = true
 vim.opt.shell = 'zsh'
 vim.opt.termguicolors = true
+
