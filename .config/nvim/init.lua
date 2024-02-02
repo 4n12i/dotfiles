@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugin list
 require("lazy").setup({
-    "EdenEast/nightfox.nvim",
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -24,6 +23,7 @@ require("lazy").setup({
 			local configs = require("tokyonight")
 			configs.setup({
 				style = "night", 
+				transparent = true, 
 				on_colors = function(colors) end, 
 				on_highlights = function(highlights, colors) end, 
 			})
@@ -44,23 +44,31 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
 })
 
--- vim.cmd("colorscheme nightfox")
 vim.cmd[[colorscheme tokyonight]]
-require"lualine-config"
+vim.opt.termguicolors = true -- Enable TrueColor
+
+vim.opt.shell = 'zsh'
 
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
-vim.opt.number = true
+vim.opt.fileencoding = 'utf-8'
+
+vim.opt.number = true -- Show line number
+
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.cursorline = true
-vim.opt.title = true
-vim.opt.signcolumn = 'yes'
-vim.opt.showcmd = true
-vim.opt.mouse = 'a' 
-vim.opt.hlsearch = true
-vim.opt.shell = 'zsh'
-vim.opt.termguicolors = true
+vim.opt.expandtab = true
+-- vim.opt.autoindent = true
+-- vim.opt.smartindent = true
 
+-- vim.opt.cursorline = true
+vim.opt.title = true -- Show file name in window title bar
+vim.opt.signcolumn = 'yes' -- Add margin next to line number
+vim.opt.showcmd = true -- Show the command being enterd
+vim.opt.mouse = 'a' -- Enable mouse
+vim.opt.hlsearch = true -- Highlight search results
+
+vim.list = true -- Show invisible characters as other symbols
+vim.listchars = { tab = '>>>>', trail = '-', nbsp = '+' }
+
+require"lualine-config"
