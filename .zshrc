@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-### cute prompt ###
+# prompt
 autoload -Uz colors
 colors
 
@@ -42,11 +42,11 @@ status_code () {
 
 PROMPT='%F{blue}%~%f %F{yellow}$(__git_ps1 "[")%f`git_color`%F{yellow}$(__git_ps1 "]")%f
 `status_code` %# '
-RPROMPT='%D{%H:%M:%S}'
+# RPROMPT='%D{%H:%M:%S}'
 
-# Insert new line.
+# insert new line
 function precmd() {
-    # Print a newline before the prompt, unless it's the first prompt in the process.
+    # print a newline before the prompt, unless it's the first prompt in the process.
     if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
         NEW_LINE_BEFORE_PROMPT=1
     elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
@@ -57,19 +57,23 @@ function precmd() {
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# enable color support
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
 fi
 
-### history ###
+# ls
+alias ll='ls -l'
+alias la='ls -a'
+
+# history
 setopt share_history
 setopt hist_reduce_blanks
 setopt hist_ignore_all_dups
@@ -80,10 +84,5 @@ setopt autocd
 unsetopt extendedglob
 bindkey -v
 
-### ls ###
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-### bat ###
 export BAT_THEME="Solarized (dark)"
+export PATH=$PATH:/usr/bin/zig
