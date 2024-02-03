@@ -6,6 +6,5 @@ ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 # ln -s ~/dotfiles/.wezterm.lua ~/.wezterm.lua
 
 # https://github.com/neovim/neovim/blob/master/INSTALL.md#appimage-universal-linux-package
-mkdir -p ~/.config/nvim/lua/
+mkdir -p ~/.config/nvim/
 ln -s ~/dotfiles/.config/nvim/init.lua ~/.config/nvim/init.lua
-ln -s ~/dotfiles/.config/nvim/lua/lualine-config.lua ~/.config/nvim/lua/lualine-config.lua
