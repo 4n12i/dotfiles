@@ -1,0 +1,27 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+\n$character"""
+
+add_newline = false
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false # show full path
+style = "blue"
+
+[git_branch]
+style = "yellow"
+
+[git_status]
+style = "red"
+
+[character]
+success_symbol = "[\\(*'-'\\)<[ \\$](white)](purple)" # (*'-')< $
+error_symbol = "[\\(*;-;\\)<[ \\$](white)](cyan)" # (*;-;)< $
+

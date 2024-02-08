@@ -86,3 +86,5 @@ bindkey -v
 
 export BAT_THEME="Solarized (dark)"
 export PATH=$PATH:/usr/bin/zig
+
+# eval "$(starship init zsh)"
