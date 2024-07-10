@@ -1,0 +1,8 @@
+import = [
+    "~/.config/alacritty/tokyo-night.toml"
+]
+
+[font.normal]
+family = "SauceCodePro Nerd Font"
+style = "Regular"
+
