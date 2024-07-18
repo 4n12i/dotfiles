@@ -52,28 +52,37 @@ require("lazy").setup({
             options = { theme = "tokyonight" }, 
         }
     }, 
+
+
+    -- Rust lsp
+    {
+        "neovim/nvim-lspconfig", 
+        opts = {
+            on_attach = function(client, bufnr)
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end, 
+            settings = {
+                ["rust-analyzer"] = {
+                    checkOnSave = true, 
+                    check = { command = "clippy", features = "all" }, 
+                    diagnostics = {
+                        enable = true, 
+                    }, 
+                    cargo = {
+                        features = "all", 
+                    }, 
+                    inlayHints = {
+                        typeHints = true, 
+                    }, 
+                }, 
+            }, 
+        }, 
+        config = function(_, opts)
+            require("lspconfig").rust_analyzer.setup(opts)
+        end 
+
+    }
 })
 
-vim.opt.termguicolors = true -- Enable TrueColor
-vim.opt.shell = 'zsh'
-vim.opt.number = true -- Show line number
-
-vim.scriptencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
--- vim.opt.autoindent = true
--- vim.opt.smartindent = true
-
-vim.opt.cursorline = true
-vim.opt.title = true -- show file name in window title bar
-vim.opt.signcolumn = 'yes' -- add margin next to line number
-vim.opt.showcmd = true -- show the command being enterd
-vim.opt.mouse = 'a' -- enable mouse
-vim.opt.hlsearch = true -- highlight search results
-
-vim.opt.list = true -- show invisible characters as other symbols
+require("options")
 
