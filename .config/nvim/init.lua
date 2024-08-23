@@ -53,7 +53,6 @@ require("lazy").setup({
         }
     }, 
 
-
     -- Rust lsp
     {
         "neovim/nvim-lspconfig", 
@@ -80,8 +79,21 @@ require("lazy").setup({
         config = function(_, opts)
             require("lspconfig").rust_analyzer.setup(opts)
         end 
+    }, 
 
-    }
+    -- file explorer
+    -- {
+    --     "echasnovski/mini.nvim", 
+    --     version = false, 
+    --     config = function()
+    --         require("mini.files").setup()
+    --     end
+    -- }, 
+    {
+        "nvim-telescope/telescope-file-browser.nvim", 
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }, 
+    }, 
+
 })
 
 require("options")
