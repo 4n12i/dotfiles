@@ -38,7 +38,7 @@ require("lazy").setup({
         opts = {
             highlight = { enable = true }, 
             indent = { enable = true }, 
-            ensure_installed = {"lua", "rust", "zig", "c", "python"}, 
+            ensure_installed = {"lua", "rust", "zig", "c", "python", "cpp", "java"}, 
         }, 
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
@@ -82,18 +82,26 @@ require("lazy").setup({
     }, 
 
     -- file explorer
-    -- {
-    --     "echasnovski/mini.nvim", 
-    --     version = false, 
-    --     config = function()
-    --         require("mini.files").setup()
-    --     end
-    -- }, 
     {
         "nvim-telescope/telescope-file-browser.nvim", 
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }, 
+        config = function()
+            require("telescope").setup({
+                extensions = {
+                    file_browser = { hidden = { file_browser = true }}, 
+                }, 
+            })
+            vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+        end
     }, 
 
+    -- git
+    {
+        "lewis6991/gitsigns.nvim", 
+        config = function()
+            require("gitsigns").setup()
+        end
+    }, 
 })
 
 require("options")
